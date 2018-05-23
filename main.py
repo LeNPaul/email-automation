@@ -28,3 +28,13 @@ submitPassword.click()
 time.sleep(1)
 
 browser.get(info['linkOne'])
+
+time.sleep(10)
+
+browser.get(info['linkTwo'])
+
+time.sleep(10)
+
+browser.get(info['linkThree'])
+
+# todo: add retry functionality on error
