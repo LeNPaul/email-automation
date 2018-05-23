@@ -24,3 +24,7 @@ password = browser.find_element_by_name('password')
 password.send_keys(info['password'])
 submitPassword = browser.find_element_by_id('passwordNext')
 submitPassword.click()
+
+time.sleep(1)
+
+browser.get(info['linkOne'])
