@@ -69,22 +69,11 @@ def thirdAction():
 
     time.sleep(1)
 
-    text = '''Hello,
-
-Thank you for reaching out to iNTERFACEWARE's support desk. Resolving your issues and answering your questions are a top priority for us. We have received your inquiry, and our support team will be in touch with you within one business day.
-
-In the meantime, you may refer to our Help Center (http://help.interfaceware.com/) for more information.
-
-Please note that our working hours are 9:00am to 5:00pm EST from Monday to Friday excluding Statutory Holidays recognized in the province of Ontario, Canada.
-
-For customers with 24/7 Support, please use the emergency support channels provided for immediate assistance.
-
-Thank you,
-
-Client Solutions Team'''
+    file = open('email.txt', 'r')
+    email =file.read()
 
     textBox = browser.find_element_by_xpath("//textarea[@id='gwt-uid-261']")
-    textBox.send_keys(text)
+    textBox.send_keys(email)
 
     time.sleep(2)
 
@@ -99,7 +88,7 @@ Client Solutions Team'''
 file = open('credentials.json', 'r')
 info = json.loads(file.read())
 
-print "Initializing email autoresponder"
+print "Initializing email autoresponder..."
 
 # Log into Google account
 loggedIn = None
@@ -107,42 +96,42 @@ while not loggedIn:
     try:
         # Set path to the chromedriver
         browser = webdriver.Chrome(info['cdPath'])
-        print "Logging into Google account"
+        print "Logging into Google account..."
         loggedIn = login()
-        print "Log in successful"
+        print "Log in successful!"
     except:
         browser.quit()
-        print "Failed to login - will try again"
+        print "Failed to login - will try again..."
 
 # Do the first action
 step1 = None
 while not step1:
     try:
-        print "Performing first action"
+        print "Setting 'No email' on internal solutions member to ensure no internal members will receive support emails during off hour..."
         step1 = firstAction()
-        print "First action successful"
+        print "Success!"
     except:
-        print "First step failed - will try again"
+        print "Action failed - will try again..."
 
 # Do the second action
 step2 = None
 while not step2:
     try:
-        print "Performing second action"
+        print "Uncheck 'Moderate messages from non-members of group' to ensure no approval process to block auto reply..."
         step2 = secondAction()
-        print "Second action successful"
+        print "Success!"
     except:
-        print "Second step failed - will try again"
+        print "Action failed - will try again"
 
 # Do the third action
 step3 = None
 while not step3:
     try:
-        print "Performaing third action"
+        print "Enable Auto Reply with default message"
         step3 = thirdAction()
-        print "Third action successful"
+        print "Success!"
     except:
-        print "Third step failed - will try again"
+        print "Action failed - will try again"
 
 print "Email autoresponder turned on, now closing browser"
 browser.close()
