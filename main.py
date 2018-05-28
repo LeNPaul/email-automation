@@ -98,7 +98,7 @@ while not loggedIn:
         browser = webdriver.Chrome(info['cdPath'])
         print "Logging into Google account..."
         loggedIn = login()
-        print "Log in successful!"
+        print "Login successful!"
     except:
         browser.quit()
         print "Failed to login - will try again..."
@@ -121,18 +121,19 @@ while not step2:
         step2 = secondAction()
         print "Success!"
     except:
-        print "Action failed - will try again"
+        print "Action failed - will try again..."
 
 # Do the third action
 step3 = None
 while not step3:
     try:
-        print "Enable Auto Reply with default message"
+        print "Enabling autoresponder with default message..."
         step3 = thirdAction()
         print "Success!"
     except:
-        print "Action failed - will try again"
+        print "Action failed - will try again..."
 
-print "Email autoresponder turned on, now closing browser"
+print "Email autoresponder turned on!"
+print "Closing browser..."
 browser.close()
 print "Browser turned off"
