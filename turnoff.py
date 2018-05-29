@@ -104,7 +104,7 @@ while not loggedIn:
 step1 = None
 while not step1:
     try:
-        print "[" + time.asctime(time.localtime(time.time())) + "] Setting 'All email' on internal solutions member to ensure internal members will receive support emails during office hours..."
+        print "[" + time.asctime(time.localtime(time.time())) + "] Changing delivery setting to 'All Email' for internal solutions group member..."
         step1 = firstAction()
         print "[" + time.asctime(time.localtime(time.time())) + "] Success! "
     except:
@@ -114,7 +114,7 @@ while not step1:
 step2 = None
 while not step2:
     try:
-        print "[" + time.asctime(time.localtime(time.time())) + "] Check 'Moderate messages from non-members of group' to ensure approval process is enabled..."
+        print "[" + time.asctime(time.localtime(time.time())) + "] Checking 'Moderate messages from non-members of group' to enable approval process..."
         step2 = secondAction()
         print "[" + time.asctime(time.localtime(time.time())) + "] Success! "
     except:
@@ -124,7 +124,7 @@ while not step2:
 step3 = None
 while not step3:
     try:
-        print "[" + time.asctime(time.localtime(time.time())) + "] Disable autoresponder and stop sending default message..."
+        print "[" + time.asctime(time.localtime(time.time())) + "] Disabling autoresponder..."
         step3 = thirdAction()
         print "[" + time.asctime(time.localtime(time.time())) + "] Success! "
     except:
