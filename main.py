@@ -88,7 +88,7 @@ def thirdAction():
 file = open('credentials.json', 'r')
 info = json.loads(file.read())
 
-print "\nInitializing email autoresponder... \n"
+print "\n[" + time.asctime(time.localtime(time.time())) + "] Initializing email autoresponder..."
 
 # Log into Google account
 loggedIn = None
@@ -96,44 +96,44 @@ while not loggedIn:
     try:
         # Set path to the chromedriver
         browser = webdriver.Chrome(info['cdPath'])
-        print "Logging into Google account..."
+        print "[" + time.asctime(time.localtime(time.time())) + "] Logging into Google account..."
         loggedIn = login()
-        print "Login successful! \n"
+        print "[" + time.asctime(time.localtime(time.time())) + "] Login successful!"
     except:
         browser.quit()
-        print "Failed to login - will try again..."
+        print "[" + time.asctime(time.localtime(time.time())) + "] Failed to login - will try again..."
 
 # Do the first action
 step1 = None
 while not step1:
     try:
-        print "Setting 'No email' on internal solutions member to ensure no internal members will receive support emails during off hour..."
+        print "[" + time.asctime(time.localtime(time.time())) + "] Setting 'No email' on internal solutions member to ensure no internal members will receive support emails during off hour..."
         step1 = firstAction()
-        print "Success! \n"
+        print "[" + time.asctime(time.localtime(time.time())) + "] Success!"
     except:
-        print "Action failed - will try again..."
+        print "[" + time.asctime(time.localtime(time.time())) + "] Action failed - will try again..."
 
 # Do the second action
 step2 = None
 while not step2:
     try:
-        print "Uncheck 'Moderate messages from non-members of group' to ensure no approval process to block auto reply..."
+        print "[" + time.asctime(time.localtime(time.time())) + "] Uncheck 'Moderate messages from non-members of group' to ensure no approval process to block auto reply..."
         step2 = secondAction()
-        print "Success! \n"
+        print "[" + time.asctime(time.localtime(time.time())) + "] Success!"
     except:
-        print "Action failed - will try again..."
+        print "[" + time.asctime(time.localtime(time.time())) + "] Action failed - will try again..."
 
 # Do the third action
 step3 = None
 while not step3:
     try:
-        print "Enabling autoresponder with default message..."
+        print "[" + time.asctime(time.localtime(time.time())) + "] Enabling autoresponder with default message..."
         step3 = thirdAction()
-        print "Success! \n"
+        print "[" + time.asctime(time.localtime(time.time())) + "] Success!"
     except:
-        print "Action failed - will try again..."
+        print "[" + time.asctime(time.localtime(time.time())) + "] Action failed - will try again..."
 
-print "Email autoresponder turned on!"
-print "Closing browser..."
+print "[" + time.asctime(time.localtime(time.time())) + "] Email autoresponder turned on!"
+print "[" + time.asctime(time.localtime(time.time())) + "] Closing browser..."
 browser.close()
-print "Browser turned off"
+print "[" + time.asctime(time.localtime(time.time())) + "] Browser turned off"

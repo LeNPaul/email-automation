@@ -125,7 +125,7 @@ while not step3:
     except:
         print "Action failed - will try again..."
 
-print "Email autoresponder turned on!"
+print "Email autoresponder turned off!"
 print "Closing browser..."
 browser.close()
 print "Browser turned off"
