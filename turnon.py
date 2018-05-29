@@ -1,5 +1,6 @@
 # todo:
 #   - Replace the time.sleep() functions with some kind of function that waits for the browser to finish loading before running the next action
+#   - Need to action some kind of checking to make sure that actions aren't repeated (therefore cancelling each out) on a retry
 
 from selenium import webdriver
 from selenium.webdriver.chrome.options import Options
