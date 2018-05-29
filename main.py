@@ -88,7 +88,7 @@ def thirdAction():
 file = open('credentials.json', 'r')
 info = json.loads(file.read())
 
-print "Initializing email autoresponder..."
+print "\nInitializing email autoresponder... \n"
 
 # Log into Google account
 loggedIn = None
@@ -98,7 +98,7 @@ while not loggedIn:
         browser = webdriver.Chrome(info['cdPath'])
         print "Logging into Google account..."
         loggedIn = login()
-        print "Login successful!"
+        print "Login successful! \n"
     except:
         browser.quit()
         print "Failed to login - will try again..."
@@ -109,7 +109,7 @@ while not step1:
     try:
         print "Setting 'No email' on internal solutions member to ensure no internal members will receive support emails during off hour..."
         step1 = firstAction()
-        print "Success!"
+        print "Success! \n"
     except:
         print "Action failed - will try again..."
 
@@ -119,7 +119,7 @@ while not step2:
     try:
         print "Uncheck 'Moderate messages from non-members of group' to ensure no approval process to block auto reply..."
         step2 = secondAction()
-        print "Success!"
+        print "Success! \n"
     except:
         print "Action failed - will try again..."
 
@@ -129,7 +129,7 @@ while not step3:
     try:
         print "Enabling autoresponder with default message..."
         step3 = thirdAction()
-        print "Success!"
+        print "Success! \n"
     except:
         print "Action failed - will try again..."
 
