@@ -1,4 +1,5 @@
 from selenium import webdriver
+from selenium.webdriver.chrome.options import Options
 import json
 import time
 
@@ -64,7 +65,7 @@ def thirdAction():
 
     time.sleep(2)
 
-    enable = browser.find_element_by_id('gwt-uid-277') #gwt-uid-277
+    enable = browser.find_element_by_id('gwt-uid-277')
     enable.click()
 
     time.sleep(1)
@@ -80,6 +81,10 @@ def thirdAction():
 file = open('credentials.json', 'r')
 info = json.loads(file.read())
 
+# Instantiate a chrome options object so you can set the size and headless preference
+chrome_options = Options()
+chrome_options.set_headless(headless=False)
+
 print "\n[" + time.asctime(time.localtime(time.time())) + "] Turning off email autoresponder... "
 
 # Log into Google account
@@ -87,7 +92,7 @@ loggedIn = None
 while not loggedIn:
     try:
         # Set path to the chromedriver
-        browser = webdriver.Chrome(info['cdPath'])
+        browser = webdriver.Chrome(chrome_options=chrome_options, executable_path=info['cdPath'])
         print "[" + time.asctime(time.localtime(time.time())) + "] Logging into Google account..."
         loggedIn = login()
         print "[" + time.asctime(time.localtime(time.time())) + "] Login successful! "

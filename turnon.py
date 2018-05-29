@@ -2,6 +2,7 @@
 #   - Replace the time.sleep() functions with some kind of function that waits for the browser to finish loading before running the next action
 
 from selenium import webdriver
+from selenium.webdriver.chrome.options import Options
 import json
 import time
 
@@ -91,6 +92,10 @@ def thirdAction():
 file = open('credentials.json', 'r')
 info = json.loads(file.read())
 
+# Instantiate a chrome options object so you can set the size and headless preference
+chrome_options = Options()
+chrome_options.set_headless(headless=False)
+
 print "\n[" + time.asctime(time.localtime(time.time())) + "] Initializing email autoresponder..."
 
 # Log into Google account
@@ -98,7 +103,7 @@ loggedIn = None
 while not loggedIn:
     try:
         # Set path to the chromedriver
-        browser = webdriver.Chrome(info['cdPath'])
+        browser = webdriver.Chrome(chrome_options=chrome_options, executable_path=info['cdPath'])
         print "[" + time.asctime(time.localtime(time.time())) + "] Logging into Google account..."
         loggedIn = login()
         print "[" + time.asctime(time.localtime(time.time())) + "] Login successful!"
