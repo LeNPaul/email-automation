@@ -95,7 +95,7 @@ while not loggedIn:
         browser = webdriver.Chrome(chrome_options=chrome_options, executable_path=info['cdPath'])
         print "[" + time.asctime(time.localtime(time.time())) + "] Logging into Google account..."
         loggedIn = login()
-        print "[" + time.asctime(time.localtime(time.time())) + "] Login successful! "
+        print "[" + time.asctime(time.localtime(time.time())) + "] Success!"
     except:
         browser.quit()
         print "[" + time.asctime(time.localtime(time.time())) + "] Failed to login - will try again..."
