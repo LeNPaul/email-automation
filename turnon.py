@@ -11,16 +11,16 @@ def login():
 
     browser.get('https://accounts.google.com')
 
-    email = browser.find_element_by_name('identifier')
+    email = browser.find_element_by_css_selector('input[type=email]')
     email.send_keys(info['username'])
-    submitEmail = browser.find_element_by_id('identifierNext')
+    submitEmail = browser.find_element_by_css_selector('div[id=identifierNext]')
     submitEmail.click()
 
     time.sleep(1)
 
-    password = browser.find_element_by_name('password')
+    password = browser.find_element_by_css_selector('input[type=password]')
     password.send_keys(info['password'])
-    submitPassword = browser.find_element_by_id('passwordNext')
+    submitPassword = browser.find_element_by_css_selector('div[id=passwordNext]')
     submitPassword.click()
 
     time.sleep(1)
