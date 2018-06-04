@@ -13,15 +13,19 @@ def login():
 
     email = browser.find_element_by_css_selector('input[type=email]')
     email.send_keys(info['username'])
-    submitEmail = browser.find_element_by_css_selector('div[id=identifierNext]')
-    submitEmail.click()
+
+    time.sleep(1)
+
+    email.send_keys(u'\ue007')
 
     time.sleep(1)
 
     password = browser.find_element_by_css_selector('input[type=password]')
     password.send_keys(info['password'])
-    submitPassword = browser.find_element_by_css_selector('div[id=passwordNext]')
-    submitPassword.click()
+
+    time.sleep(1)
+
+    password.send_keys(u'\ue007')
 
     time.sleep(1)
 
