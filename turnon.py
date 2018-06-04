@@ -99,7 +99,7 @@ info = json.loads(file.read())
 
 # Instantiate a chrome options object so you can set the size and headless preference
 chrome_options = Options()
-chrome_options.set_headless(headless=False)
+chrome_options.set_headless(headless=True)
 
 print "\n[" + time.asctime(time.localtime(time.time())) + "] Initializing email autoresponder..."
 
