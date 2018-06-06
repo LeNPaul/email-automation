@@ -14,20 +14,20 @@ def login():
     email = browser.find_element_by_css_selector('input[type=email]')
     email.send_keys(info['username'])
 
-    time.sleep(1)
+    time.sleep(2)
 
     email.send_keys(u'\ue007')
 
-    time.sleep(1)
+    time.sleep(2)
 
     password = browser.find_element_by_css_selector('input[type=password]')
     password.send_keys(info['password'])
 
-    time.sleep(1)
+    time.sleep(2)
 
     password.send_keys(u'\ue007')
 
-    time.sleep(1)
+    time.sleep(2)
 
     return browser.find_element_by_link_text('About Google')
 
@@ -35,17 +35,17 @@ def firstAction():
 
     browser.get(info['linkOne'])
 
-    time.sleep(1)
+    time.sleep(2)
 
     selector = browser.find_element_by_id('gwt-uid-184')
     selector.click()
 
-    time.sleep(1)
+    time.sleep(2)
 
     save = browser.find_element_by_xpath('//div[@aria-label="Save"]')
     save.click()
 
-    time.sleep(1)
+    time.sleep(2)
 
     return browser.find_element_by_id('groups-banner-link')
 
@@ -53,17 +53,17 @@ def secondAction():
 
     browser.get(info['linkTwo'])
 
-    time.sleep(1)
+    time.sleep(2)
 
     selector = browser.find_element_by_id('gwt-uid-345')
     selector.click()
 
-    time.sleep(1)
+    time.sleep(2)
 
     save = browser.find_element_by_xpath('//div[@aria-label="Save"]')
     save.click()
 
-    time.sleep(1)
+    time.sleep(2)
 
     return browser.find_element_by_link_text('Groups')
 
@@ -71,12 +71,12 @@ def thirdAction():
 
     browser.get(info['linkThree'])
 
-    time.sleep(1)
+    time.sleep(2)
 
     enable = browser.find_element_by_id('gwt-uid-277') #gwt-uid-277
     enable.click()
 
-    time.sleep(1)
+    time.sleep(2)
 
     file = open('email.txt', 'r')
     email =file.read()
@@ -84,12 +84,12 @@ def thirdAction():
     textBox = browser.find_element_by_xpath("//textarea[@id='gwt-uid-261']")
     textBox.send_keys(email)
 
-    time.sleep(1)
+    time.sleep(2)
 
     save = browser.find_element_by_xpath('//*[@data-title="Save"]')
     save.click()
 
-    time.sleep(1)
+    time.sleep(2)
 
     return browser.find_element_by_link_text('Groups')
 
