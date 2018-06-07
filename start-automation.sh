@@ -1,3 +1,3 @@
 #!/bin/bash
 
-nohup python main.py > logs.txt
+nohup python main.py > logs.txt &;
