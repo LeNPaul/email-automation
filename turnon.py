@@ -7,148 +7,150 @@ from selenium.webdriver.chrome.options import Options
 import json
 import time
 
-def login():
+def enable():
 
-    browser.get('https://accounts.google.com')
+    def login():
 
-    email = browser.find_element_by_css_selector('input[type=email]')
-    email.send_keys(info['username'])
+        browser.get('https://accounts.google.com')
 
-    time.sleep(2)
+        email = browser.find_element_by_css_selector('input[type=email]')
+        email.send_keys(info['username'])
 
-    email.send_keys(u'\ue007')
+        time.sleep(2)
 
-    time.sleep(2)
+        email.send_keys(u'\ue007')
 
-    password = browser.find_element_by_css_selector('input[type=password]')
-    password.send_keys(info['password'])
+        time.sleep(2)
 
-    time.sleep(2)
+        password = browser.find_element_by_css_selector('input[type=password]')
+        password.send_keys(info['password'])
 
-    password.send_keys(u'\ue007')
+        time.sleep(2)
 
-    time.sleep(2)
+        password.send_keys(u'\ue007')
 
-    return browser.find_element_by_link_text('About Google')
+        time.sleep(2)
 
-def firstAction():
+        return browser.find_element_by_link_text('About Google')
 
-    browser.get(info['linkOne'])
+    def firstAction():
 
-    time.sleep(2)
+        browser.get(info['linkOne'])
 
-    selector = browser.find_element_by_id('gwt-uid-184')
-    selector.click()
+        time.sleep(2)
 
-    time.sleep(2)
+        selector = browser.find_element_by_id('gwt-uid-184')
+        selector.click()
 
-    save = browser.find_element_by_xpath('//div[@aria-label="Save"]')
-    save.click()
+        time.sleep(2)
 
-    time.sleep(2)
+        save = browser.find_element_by_xpath('//div[@aria-label="Save"]')
+        save.click()
 
-    return browser.find_element_by_id('groups-banner-link')
+        time.sleep(2)
 
-def secondAction():
+        return browser.find_element_by_id('groups-banner-link')
 
-    browser.get(info['linkTwo'])
+    def secondAction():
 
-    time.sleep(2)
+        browser.get(info['linkTwo'])
 
-    selector = browser.find_element_by_id('gwt-uid-345')
-    selector.click()
+        time.sleep(2)
 
-    time.sleep(2)
+        selector = browser.find_element_by_id('gwt-uid-345')
+        selector.click()
 
-    save = browser.find_element_by_xpath('//div[@aria-label="Save"]')
-    save.click()
+        time.sleep(2)
 
-    time.sleep(2)
+        save = browser.find_element_by_xpath('//div[@aria-label="Save"]')
+        save.click()
 
-    return browser.find_element_by_link_text('Groups')
+        time.sleep(2)
 
-def thirdAction():
+        return browser.find_element_by_link_text('Groups')
 
-    browser.get(info['linkThree'])
+    def thirdAction():
 
-    time.sleep(2)
+        browser.get(info['linkThree'])
 
-    enable = browser.find_element_by_id('gwt-uid-277') #gwt-uid-277
-    enable.click()
+        time.sleep(2)
 
-    time.sleep(2)
+        enable = browser.find_element_by_id('gwt-uid-277') #gwt-uid-277
+        enable.click()
 
-    file = open('email.txt', 'r')
-    email =file.read()
+        time.sleep(2)
 
-    textBox = browser.find_element_by_xpath("//textarea[@id='gwt-uid-261']")
-    textBox.send_keys(email)
+        file = open('email.txt', 'r')
+        email =file.read()
 
-    time.sleep(2)
+        textBox = browser.find_element_by_xpath("//textarea[@id='gwt-uid-261']")
+        textBox.send_keys(email)
 
-    save = browser.find_element_by_xpath('//*[@data-title="Save"]')
-    save.click()
+        time.sleep(2)
 
-    time.sleep(2)
+        save = browser.find_element_by_xpath('//*[@data-title="Save"]')
+        save.click()
 
-    return browser.find_element_by_link_text('Groups')
+        time.sleep(2)
 
-# Read in credentials and chromedriver file path
-file = open('credentials.json', 'r')
-info = json.loads(file.read())
-file.close()
+        return browser.find_element_by_link_text('Groups')
 
-# Instantiate a chrome options object so you can set the size and headless preference
-chrome_options = Options()
-chrome_options.set_headless(headless=True)
+    # Read in credentials and chromedriver file path
+    file = open('credentials.json', 'r')
+    info = json.loads(file.read())
+    file.close()
 
-print "\n[" + time.asctime(time.localtime(time.time())) + "] Initializing email autoresponder..."
+    # Instantiate a chrome options object so you can set the size and headless preference
+    chrome_options = Options()
+    chrome_options.set_headless(headless=True)
 
-# Log into Google account
-loggedIn = None
-while not loggedIn:
-    try:
-        # Set path to the chromedriver
-        browser = webdriver.Chrome(chrome_options=chrome_options, executable_path=info['cdPath'])
-        print "[" + time.asctime(time.localtime(time.time())) + "] Logging into Google account..."
-        loggedIn = login()
-        print "[" + time.asctime(time.localtime(time.time())) + "] Success!"
-    except:
-        browser.quit()
-        print "[" + time.asctime(time.localtime(time.time())) + "] Failed to login - will try again..."
+    print "\n[" + time.asctime(time.localtime(time.time())) + "] Initializing email autoresponder..."
 
-# Do the first action
-step1 = None
-while not step1:
-    try:
-        print "[" + time.asctime(time.localtime(time.time())) + "] Changing delivery setting to 'No Email' for internal solutions group member..."
-        step1 = firstAction()
-        print "[" + time.asctime(time.localtime(time.time())) + "] Success!"
-    except:
-        print "[" + time.asctime(time.localtime(time.time())) + "] Action failed - will try again..."
+    # Log into Google account
+    loggedIn = None
+    while not loggedIn:
+        try:
+            # Set path to the chromedriver
+            browser = webdriver.Chrome(chrome_options=chrome_options, executable_path=info['cdPath'])
+            print "[" + time.asctime(time.localtime(time.time())) + "] Logging into Google account..."
+            loggedIn = login()
+            print "[" + time.asctime(time.localtime(time.time())) + "] Success!"
+        except:
+            browser.quit()
+            print "[" + time.asctime(time.localtime(time.time())) + "] Failed to login - will try again..."
 
-# Do the second action
-step2 = None
-while not step2:
-    try:
-        print "[" + time.asctime(time.localtime(time.time())) + "] Unchecking 'Moderate messages from non-members of group' to disable approval process..."
-        step2 = secondAction()
-        print "[" + time.asctime(time.localtime(time.time())) + "] Success!"
-    except:
-        print "[" + time.asctime(time.localtime(time.time())) + "] Action failed - will try again..."
+    # Do the first action
+    step1 = None
+    while not step1:
+        try:
+            print "[" + time.asctime(time.localtime(time.time())) + "] Changing delivery setting to 'No Email' for internal solutions group member..."
+            step1 = firstAction()
+            print "[" + time.asctime(time.localtime(time.time())) + "] Success!"
+        except:
+            print "[" + time.asctime(time.localtime(time.time())) + "] Action failed - will try again..."
 
-# Do the third action
-step3 = None
-while not step3:
-    try:
-        print "[" + time.asctime(time.localtime(time.time())) + "] Enabling autoresponder with default message..."
-        step3 = thirdAction()
-        print "[" + time.asctime(time.localtime(time.time())) + "] Success!"
-    except:
-        print "[" + time.asctime(time.localtime(time.time())) + "] Action failed - will try again..."
+    # Do the second action
+    step2 = None
+    while not step2:
+        try:
+            print "[" + time.asctime(time.localtime(time.time())) + "] Unchecking 'Moderate messages from non-members of group' to disable approval process..."
+            step2 = secondAction()
+            print "[" + time.asctime(time.localtime(time.time())) + "] Success!"
+        except:
+            print "[" + time.asctime(time.localtime(time.time())) + "] Action failed - will try again..."
 
-print "[" + time.asctime(time.localtime(time.time())) + "] Closing browser..."
-browser.close()
-print "[" + time.asctime(time.localtime(time.time())) + "] Browser turned off"
+    # Do the third action
+    step3 = None
+    while not step3:
+        try:
+            print "[" + time.asctime(time.localtime(time.time())) + "] Enabling autoresponder with default message..."
+            step3 = thirdAction()
+            print "[" + time.asctime(time.localtime(time.time())) + "] Success!"
+        except:
+            print "[" + time.asctime(time.localtime(time.time())) + "] Action failed - will try again..."
 
-print "[" + time.asctime(time.localtime(time.time())) + "] Email autoresponder turned on!"
+    print "[" + time.asctime(time.localtime(time.time())) + "] Closing browser..."
+    browser.close()
+    print "[" + time.asctime(time.localtime(time.time())) + "] Browser turned off"
+
+    print "[" + time.asctime(time.localtime(time.time())) + "] Email autoresponder turned on!"

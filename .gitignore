@@ -3,3 +3,4 @@ credentials.json
 email.txt
 logs.txt
 .DS_Store
+*.pyc
