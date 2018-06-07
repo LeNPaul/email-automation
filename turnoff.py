@@ -142,3 +142,5 @@ def disable():
     print "[" + time.asctime(time.localtime(time.time())) + "] Browser turned off"
 
     print "[" + time.asctime(time.localtime(time.time())) + "] Email autoresponder turned off!"
+
+    print "[" + time.asctime(time.localtime(time.time())) + "] Email automation successful!"

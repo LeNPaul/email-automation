@@ -19,4 +19,4 @@ schedule.every().friday.at("9:00").do(turnon.disable)
 
 while True:
     schedule.run_pending()
-    time.sleep(1)
+    time.sleep(10)
