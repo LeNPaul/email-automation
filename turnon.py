@@ -137,7 +137,7 @@ def enable():
             # Close previous browser object
             browser.quit()
             print "[" + time.asctime(time.localtime(time.time())) + "] Failed to login. Will try again..."
-            time.sleep(2)
+            time.sleep(5)
 
     # Do the first action
     step1 = False
@@ -146,7 +146,8 @@ def enable():
             step1 = setNoEmail()
         except:
             print "[" + time.asctime(time.localtime(time.time())) + "] Action failed - will try again..."
-            time.sleep(2)
+            browser.refresh()
+            time.sleep(5)
 
     # Do the second action
     step2 = False
@@ -155,7 +156,8 @@ def enable():
             step2 = disableModeration()
         except:
             print "[" + time.asctime(time.localtime(time.time())) + "] Action failed. Will try again..."
-            time.sleep(2)
+            browser.refresh()
+            time.sleep(5)
 
     # Do the third action
     step3 = False
@@ -164,7 +166,8 @@ def enable():
             step3 = enableAutoReply()
         except:
             print "[" + time.asctime(time.localtime(time.time())) + "] Action failed. Will try again..."
-            time.sleep(2)
+            browser.refresh()
+            time.sleep(5)
 
     print "[" + time.asctime(time.localtime(time.time())) + "] Closing browser..."
     browser.close()
@@ -172,4 +175,6 @@ def enable():
 
     print "[" + time.asctime(time.localtime(time.time())) + "] Email autoresponder turned on!"
 
-    print "[" + time.asctime(time.localtime(time.time())) + "] Email automation successful!"
+    logs = open('logs.txt','a')
+    logs.write("[" + time.asctime(time.localtime(time.time())) + "] Process completed, email autoresponder enabled! Email automation successful! \n")
+    logs.close()
