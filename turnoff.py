@@ -59,39 +59,51 @@ def disable():
 
     def enableModeration():
 
+        print "[" + time.asctime(time.localtime(time.time())) + "] Checking 'Moderate messages from non-members of group' to enable approval process..."
+
         browser.get(info['linkTwo'])
+        wait = WebDriverWait(browser,5)
 
-        time.sleep(2)
-
-        selector = browser.find_element_by_id('gwt-uid-345')
+        selector = wait.until(
+             EC.presence_of_element_located((By.ID, 'gwt-uid-345')))
         selector.click()
 
-        time.sleep(2)
-
-        save = browser.find_element_by_xpath('//div[@aria-label="Save"]')
+        save = wait.until(
+             EC.presence_of_element_located((By.XPATH, '//div[@aria-label="Save"]')))
         save.click()
 
         time.sleep(2)
 
-        return browser.find_element_by_link_text('Groups')
+        nextPage = wait.until(
+             EC.presence_of_element_located((By.XPATH, '//div[@aria-disabled="true"]')))
+
+        print "[" + time.asctime(time.localtime(time.time())) + "] Success! "
+
+        return True
 
     def disableAutoReply():
 
+        print "[" + time.asctime(time.localtime(time.time())) + "] Disabling autoresponder..."
+
         browser.get(info['linkThree'])
+        wait = WebDriverWait(browser,5)
 
-        time.sleep(2)
-
-        enable = browser.find_element_by_id('gwt-uid-277')
+        enable = wait.until(
+             EC.presence_of_element_located((By.ID, 'gwt-uid-277')))
         enable.click()
 
-        time.sleep(2)
-
-        save = browser.find_element_by_xpath('//*[@data-title="Save"]')
+        save = wait.until(
+             EC.presence_of_element_located((By.XPATH, '//*[@data-title="Save"]')))
         save.click()
 
         time.sleep(2)
 
-        return browser.find_element_by_link_text('Groups')
+        nextPage = wait.until(
+             EC.presence_of_element_located((By.XPATH, '//div[@aria-disabled="true"]')))
+
+        print "[" + time.asctime(time.localtime(time.time())) + "] Success! "
+
+        return True
 
     # Read in credentials and chromedriver file path
     file = open('credentials.json', 'r')
@@ -123,30 +135,31 @@ def disable():
             step1 = setAllEmail()
         except:
             print "[" + time.asctime(time.localtime(time.time())) + "] Action failed. Will try again..."
+            time.sleep(2)
 
     # Do the second action
-    step2 = None
+    step2 = False
     while not step2:
         try:
-            print "[" + time.asctime(time.localtime(time.time())) + "] Checking 'Moderate messages from non-members of group' to enable approval process..."
             step2 = enableModeration()
-            print "[" + time.asctime(time.localtime(time.time())) + "] Success! "
         except:
-            print "[" + time.asctime(time.localtime(time.time())) + "] Action failed - will try again..."
+            print "[" + time.asctime(time.localtime(time.time())) + "] Action failed. Will try again..."
+            time.sleep(2)
 
     # Do the third action
     step3 = None
     while not step3:
         try:
-            print "[" + time.asctime(time.localtime(time.time())) + "] Disabling autoresponder..."
             step3 = disableAutoReply()
-            print "[" + time.asctime(time.localtime(time.time())) + "] Success! "
         except:
-            print "[" + time.asctime(time.localtime(time.time())) + "] Action failed - will try again..."
+            print "[" + time.asctime(time.localtime(time.time())) + "] Action failed. Will try again..."
+            time.sleep(2)
 
     print "[" + time.asctime(time.localtime(time.time())) + "] Closing browser..."
+
     browser.close()
-    print "[" + time.asctime(time.localtime(time.time())) + "] Browser turned off"
+
+    print "[" + time.asctime(time.localtime(time.time())) + "] Browser closed!"
 
     print "[" + time.asctime(time.localtime(time.time())) + "] Email autoresponder turned off!"
 
