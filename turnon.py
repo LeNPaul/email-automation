@@ -1,5 +1,4 @@
 # todo:
-#   - Replace the time.sleep() functions with some kind of function that waits for the browser to finish loading before running the next action
 #   - Need to action some kind of checking to make sure that actions aren't repeated (therefore cancelling each out) on a retry
 
 from selenium import webdriver
@@ -8,6 +7,7 @@ from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
 from selenium.webdriver.common.keys import Keys
 from selenium.webdriver.common.by import By
+import base64
 import json
 import time
 
@@ -27,7 +27,7 @@ def enable():
 
         password = wait.until(
              EC.presence_of_element_located((By.CSS_SELECTOR, "input[type=password]")))
-        password.send_keys(info['password'])
+        password.send_keys(base64.b64decode(info['password']))
         password.send_keys(Keys.RETURN)
 
         nextPage = wait.until(
@@ -62,49 +62,58 @@ def enable():
 
     def disableModeration():
 
+        print "[" + time.asctime(time.localtime(time.time())) + "] Unchecking 'Moderate messages from non-members of group' to disable approval process..."
+
         browser.get(info['linkTwo'])
         wait = WebDriverWait(browser,5)
 
-        time.sleep(2)
-
-        selector = browser.find_element_by_id('gwt-uid-345')
+        selector = wait.until(
+             EC.presence_of_element_located((By.ID, 'gwt-uid-345')))
         selector.click()
 
-        time.sleep(2)
-
-        save = browser.find_element_by_xpath('//div[@aria-label="Save"]')
+        save = wait.until(
+             EC.presence_of_element_located((By.XPATH, '//div[@aria-label="Save"]')))
         save.click()
 
         time.sleep(2)
 
-        return browser.find_element_by_link_text('Groups')
+        nextPage = wait.until(
+             EC.presence_of_element_located((By.XPATH, '//div[@aria-disabled="true"]')))
+
+        print "[" + time.asctime(time.localtime(time.time())) + "] Success!"
+
+        return True
 
     def enableAutoReply():
+
+        print "[" + time.asctime(time.localtime(time.time())) + "] Enabling autoresponder with default message..."
 
         browser.get(info['linkThree'])
         wait = WebDriverWait(browser,5)
 
-        time.sleep(2)
-
-        enable = browser.find_element_by_id('gwt-uid-277') #gwt-uid-277
+        enable = wait.until(
+             EC.presence_of_element_located((By.ID, 'gwt-uid-277')))
         enable.click()
-
-        time.sleep(2)
 
         file = open('email.txt', 'r')
         email =file.read()
 
-        textBox = browser.find_element_by_xpath("//textarea[@id='gwt-uid-261']")
+        textBox = wait.until(
+             EC.presence_of_element_located((By.XPATH, "//textarea[@id='gwt-uid-261']")))
         textBox.send_keys(email)
 
-        time.sleep(2)
-
-        save = browser.find_element_by_xpath('//*[@data-title="Save"]')
+        save = wait.until(
+             EC.presence_of_element_located((By.XPATH, '//*[@data-title="Save"]')))
         save.click()
 
         time.sleep(2)
 
-        return browser.find_element_by_link_text('Groups')
+        nextPage = wait.until(
+             EC.presence_of_element_located((By.ID, 'groups-banner-link')))
+
+        print "[" + time.asctime(time.localtime(time.time())) + "] Success!"
+
+        return True
 
     # Read in credentials and chromedriver file path
     file = open('credentials.json', 'r')
@@ -131,7 +140,7 @@ def enable():
             time.sleep(2)
 
     # Do the first action
-    step1 = None
+    step1 = False
     while not step1:
         try:
             step1 = setNoEmail()
@@ -140,25 +149,21 @@ def enable():
             time.sleep(2)
 
     # Do the second action
-    step2 = None
+    step2 = False
     while not step2:
         try:
-            print "[" + time.asctime(time.localtime(time.time())) + "] Unchecking 'Moderate messages from non-members of group' to disable approval process..."
             step2 = disableModeration()
-            print "[" + time.asctime(time.localtime(time.time())) + "] Success!"
         except:
-            print "[" + time.asctime(time.localtime(time.time())) + "] Action failed - will try again..."
+            print "[" + time.asctime(time.localtime(time.time())) + "] Action failed. Will try again..."
             time.sleep(2)
 
     # Do the third action
-    step3 = None
+    step3 = False
     while not step3:
         try:
-            print "[" + time.asctime(time.localtime(time.time())) + "] Enabling autoresponder with default message..."
             step3 = enableAutoReply()
-            print "[" + time.asctime(time.localtime(time.time())) + "] Success!"
         except:
-            print "[" + time.asctime(time.localtime(time.time())) + "] Action failed - will try again..."
+            print "[" + time.asctime(time.localtime(time.time())) + "] Action failed. Will try again..."
             time.sleep(2)
 
     print "[" + time.asctime(time.localtime(time.time())) + "] Closing browser..."

@@ -4,6 +4,7 @@ from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
 from selenium.webdriver.common.keys import Keys
 from selenium.webdriver.common.by import By
+import base64
 import json
 import time
 
@@ -23,7 +24,7 @@ def disable():
 
         password = wait.until(
              EC.presence_of_element_located((By.CSS_SELECTOR, "input[type=password]")))
-        password.send_keys(info['password'])
+        password.send_keys(base64.b64decode(info['password']))
         password.send_keys(Keys.RETURN)
 
         nextPage = wait.until(
@@ -148,7 +149,7 @@ def disable():
             time.sleep(2)
 
     # Do the third action
-    step3 = None
+    step3 = False
     while not step3:
         try:
             step3 = disableAutoReply()
