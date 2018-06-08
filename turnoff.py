@@ -1,5 +1,6 @@
 from selenium import webdriver
 from selenium.webdriver.chrome.options import Options
+from selenium.webdriver.common.keys import Keys
 import json
 import time
 
@@ -14,7 +15,7 @@ def disable():
 
         time.sleep(2)
 
-        email.send_keys(u'\ue007')
+        email.send_keys(Keys.RETURN)
 
         time.sleep(2)
 
@@ -23,13 +24,13 @@ def disable():
 
         time.sleep(2)
 
-        password.send_keys(u'\ue007')
+        password.send_keys(Keys.RETURN)
 
         time.sleep(2)
 
         return browser.find_element_by_link_text('About Google')
 
-    def firstAction():
+    def setAllEmail():
 
         browser.get(info['linkOne'])
 
@@ -47,7 +48,7 @@ def disable():
 
         return browser.find_element_by_id('groups-banner-link')
 
-    def secondAction():
+    def enableModeration():
 
         browser.get(info['linkTwo'])
 
@@ -65,7 +66,7 @@ def disable():
 
         return browser.find_element_by_link_text('Groups')
 
-    def thirdAction():
+    def disableAutoReply():
 
         browser.get(info['linkThree'])
 
@@ -112,7 +113,7 @@ def disable():
     while not step1:
         try:
             print "[" + time.asctime(time.localtime(time.time())) + "] Changing delivery setting to 'All Email' for internal solutions group member..."
-            step1 = firstAction()
+            step1 = setAllEmail()
             print "[" + time.asctime(time.localtime(time.time())) + "] Success! "
         except:
             print "[" + time.asctime(time.localtime(time.time())) + "] Action failed - will try again..."
@@ -122,7 +123,7 @@ def disable():
     while not step2:
         try:
             print "[" + time.asctime(time.localtime(time.time())) + "] Checking 'Moderate messages from non-members of group' to enable approval process..."
-            step2 = secondAction()
+            step2 = enableModeration()
             print "[" + time.asctime(time.localtime(time.time())) + "] Success! "
         except:
             print "[" + time.asctime(time.localtime(time.time())) + "] Action failed - will try again..."
@@ -132,7 +133,7 @@ def disable():
     while not step3:
         try:
             print "[" + time.asctime(time.localtime(time.time())) + "] Disabling autoresponder..."
-            step3 = thirdAction()
+            step3 = disableAutoReply()
             print "[" + time.asctime(time.localtime(time.time())) + "] Success! "
         except:
             print "[" + time.asctime(time.localtime(time.time())) + "] Action failed - will try again..."
