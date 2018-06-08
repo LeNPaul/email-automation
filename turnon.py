@@ -14,25 +14,18 @@ def enable():
 
         browser.get('https://accounts.google.com')
 
-        email = browser.find_element_by_css_selector('input[type=email]')
+        email = WebDriverWait(browser,5).until(
+             EC.presence_of_element_located((By.CSS_SELECTOR, "input[type=email]")))
         email.send_keys(info['username'])
-
-        time.sleep(2)
-
         email.send_keys(Keys.RETURN)
 
-        time.sleep(2)
-
-        password = browser.find_element_by_css_selector('input[type=password]')
+        password = WebDriverWait(browser,5).until(
+             EC.presence_of_element_located((By.CSS_SELECTOR, "input[type=password]")))
         password.send_keys(info['password'])
-
-        time.sleep(2)
-
         password.send_keys(Keys.RETURN)
 
-        time.sleep(2)
-
-        return browser.find_element_by_link_text('About Google')
+        return WebDriverWait(browser,5).until(
+             EC.presence_of_element_located((By.LINK_TEXT, "About Google")))
 
     def setNoEmail():
 

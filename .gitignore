@@ -5,3 +5,7 @@ logs.txt
 .DS_Store
 *.pyc
 nohup.out
+
+test.py
+runtest.py
+googleTask.py
