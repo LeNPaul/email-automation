@@ -4,7 +4,10 @@
 
 from selenium import webdriver
 from selenium.webdriver.chrome.options import Options
+from selenium.webdriver.support.ui import WebDriverWait
+from selenium.webdriver.support import expected_conditions as EC
 from selenium.webdriver.common.keys import Keys
+from selenium.webdriver.common.by import By
 import json
 import time
 
@@ -13,18 +16,19 @@ def enable():
     def login():
 
         browser.get('https://accounts.google.com')
+        wait = WebDriverWait(browser,5)
 
-        email = WebDriverWait(browser,5).until(
+        email = wait.until(
              EC.presence_of_element_located((By.CSS_SELECTOR, "input[type=email]")))
         email.send_keys(info['username'])
         email.send_keys(Keys.RETURN)
 
-        password = WebDriverWait(browser,5).until(
+        password = wait.until(
              EC.presence_of_element_located((By.CSS_SELECTOR, "input[type=password]")))
         password.send_keys(info['password'])
         password.send_keys(Keys.RETURN)
 
-        return WebDriverWait(browser,5).until(
+        return wait.until(
              EC.presence_of_element_located((By.LINK_TEXT, "About Google")))
 
     def setNoEmail():

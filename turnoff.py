@@ -11,38 +11,51 @@ def disable():
 
     def login():
 
-        browser.get('https://accounts.google.com')
+        print "[" + time.asctime(time.localtime(time.time())) + "] Logging into Google account..."
 
-        email = WebDriverWait(browser,5).until(
+        browser.get('https://accounts.google.com')
+        wait = WebDriverWait(browser,5)
+
+        email = wait.until(
              EC.presence_of_element_located((By.CSS_SELECTOR, "input[type=email]")))
         email.send_keys(info['username'])
         email.send_keys(Keys.RETURN)
 
-        password = WebDriverWait(browser,5).until(
+        password = wait.until(
              EC.presence_of_element_located((By.CSS_SELECTOR, "input[type=password]")))
         password.send_keys(info['password'])
         password.send_keys(Keys.RETURN)
 
-        return WebDriverWait(browser,5).until(
+        nextPage = wait.until(
              EC.presence_of_element_located((By.LINK_TEXT, "About Google")))
+
+        print "[" + time.asctime(time.localtime(time.time())) + "] Success!"
+
+        return True
 
     def setAllEmail():
 
+        print "[" + time.asctime(time.localtime(time.time())) + "] Changing delivery setting to 'All Email' for internal solutions group member..."
+
         browser.get(info['linkOne'])
+        wait = WebDriverWait(browser,5)
 
-        time.sleep(2)
-
-        selector = browser.find_element_by_id('gwt-uid-190')
+        selector = wait.until(
+             EC.presence_of_element_located((By.ID, "gwt-uid-190")))
         selector.click()
 
-        time.sleep(2)
-
-        save = browser.find_element_by_xpath('//div[@aria-label="Save"]')
+        save = wait.until(
+             EC.presence_of_element_located((By.XPATH, '//div[@aria-label="Save"]')))
         save.click()
 
         time.sleep(2)
 
-        return browser.find_element_by_id('groups-banner-link')
+        nextPage = wait.until(
+             EC.presence_of_element_located((By.ID, 'groups-banner-link')))
+
+        print "[" + time.asctime(time.localtime(time.time())) + "] Success! "
+
+        return True
 
     def enableModeration():
 
@@ -92,27 +105,24 @@ def disable():
     print "\n[" + time.asctime(time.localtime(time.time())) + "] Turning off email autoresponder... "
 
     # Log into Google account
-    loggedIn = None
+    loggedIn = False
     while not loggedIn:
         try:
             # Set path to the chromedriver
             browser = webdriver.Chrome(chrome_options=chrome_options, executable_path=info['cdPath'])
-            print "[" + time.asctime(time.localtime(time.time())) + "] Logging into Google account..."
             loggedIn = login()
-            print "[" + time.asctime(time.localtime(time.time())) + "] Success!"
         except:
+            # Close previous browser object
             browser.quit()
-            print "[" + time.asctime(time.localtime(time.time())) + "] Failed to login - will try again..."
+            print "[" + time.asctime(time.localtime(time.time())) + "] Failed to login. Will try again..."
 
     # Do the first action
-    step1 = None
+    step1 = False
     while not step1:
         try:
-            print "[" + time.asctime(time.localtime(time.time())) + "] Changing delivery setting to 'All Email' for internal solutions group member..."
             step1 = setAllEmail()
-            print "[" + time.asctime(time.localtime(time.time())) + "] Success! "
         except:
-            print "[" + time.asctime(time.localtime(time.time())) + "] Action failed - will try again..."
+            print "[" + time.asctime(time.localtime(time.time())) + "] Action failed. Will try again..."
 
     # Do the second action
     step2 = None
