@@ -126,55 +126,60 @@ def enable():
 
     print "\n[" + time.asctime(time.localtime(time.time())) + "] Initializing email autoresponder..."
 
-    # Log into Google account
-    loggedIn = False
-    while not loggedIn:
-        try:
-            # Set path to the chromedriver
-            browser = webdriver.Chrome(chrome_options=chrome_options, executable_path=info['cdPath'])
-            loggedIn = login()
-        except:
-            # Close previous browser object
-            browser.quit()
-            print "[" + time.asctime(time.localtime(time.time())) + "] Failed to login. Will try again..."
-            time.sleep(5)
+    try:
+        # Log into Google account
+        loggedIn = False
+        while not loggedIn:
+            try:
+                # Set path to the chromedriver
+                browser = webdriver.Chrome(chrome_options=chrome_options, executable_path=info['cdPath'])
+                loggedIn = login()
+            except:
+                # Close previous browser object
+                browser.quit()
+                print "[" + time.asctime(time.localtime(time.time())) + "] Failed to login. Will try again..."
+                time.sleep(5)
 
-    # Do the first action
-    step1 = False
-    while not step1:
-        try:
-            step1 = setNoEmail()
-        except:
-            print "[" + time.asctime(time.localtime(time.time())) + "] Action failed - will try again..."
-            browser.refresh()
-            time.sleep(5)
+        # Do the first action
+        step1 = False
+        while not step1:
+            try:
+                step1 = setNoEmail()
+            except:
+                print "[" + time.asctime(time.localtime(time.time())) + "] Action failed - will try again..."
+                browser.refresh()
+                time.sleep(5)
 
-    # Do the second action
-    step2 = False
-    while not step2:
-        try:
-            step2 = disableModeration()
-        except:
-            print "[" + time.asctime(time.localtime(time.time())) + "] Action failed. Will try again..."
-            browser.refresh()
-            time.sleep(5)
+        # Do the second action
+        step2 = False
+        while not step2:
+            try:
+                step2 = disableModeration()
+            except:
+                print "[" + time.asctime(time.localtime(time.time())) + "] Action failed. Will try again..."
+                browser.refresh()
+                time.sleep(5)
 
-    # Do the third action
-    step3 = False
-    while not step3:
-        try:
-            step3 = enableAutoReply()
-        except:
-            print "[" + time.asctime(time.localtime(time.time())) + "] Action failed. Will try again..."
-            browser.refresh()
-            time.sleep(5)
+        # Do the third action
+        step3 = False
+        while not step3:
+            try:
+                step3 = enableAutoReply()
+            except:
+                print "[" + time.asctime(time.localtime(time.time())) + "] Action failed. Will try again..."
+                browser.refresh()
+                time.sleep(5)
 
-    print "[" + time.asctime(time.localtime(time.time())) + "] Closing browser..."
-    browser.close()
-    print "[" + time.asctime(time.localtime(time.time())) + "] Browser turned off"
+        print "[" + time.asctime(time.localtime(time.time())) + "] Closing browser..."
+        browser.close()
+        print "[" + time.asctime(time.localtime(time.time())) + "] Browser turned off"
 
-    print "[" + time.asctime(time.localtime(time.time())) + "] Email autoresponder turned on!"
+        print "[" + time.asctime(time.localtime(time.time())) + "] Email autoresponder turned on!"
 
-    logs = open('logs.txt','a')
-    logs.write("[" + time.asctime(time.localtime(time.time())) + "] Process completed, email autoresponder enabled! Email automation successful! \n")
-    logs.close()
+        logs = open('logs.txt','a')
+        logs.write("[" + time.asctime(time.localtime(time.time())) + "] Process completed, email autoresponder enabled! Email automation successful! \n")
+        logs.close()
+    except:
+        print "[" + time.asctime(time.localtime(time.time())) + "] Process error, email autoresponder not enabled! Email automation failed! \n"
+        logs = open('logs.txt','a')
+        logs.write("[" + time.asctime(time.localtime(time.time())) + "] Process error, email autoresponder not enabled! Email automation failed! \n")
