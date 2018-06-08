@@ -127,6 +127,7 @@ def disable():
             # Close previous browser object
             browser.quit()
             print "[" + time.asctime(time.localtime(time.time())) + "] Failed to login. Will try again..."
+            time.sleep(2)
 
     # Do the first action
     step1 = False

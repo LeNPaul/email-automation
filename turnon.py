@@ -15,6 +15,8 @@ def enable():
 
     def login():
 
+        print "[" + time.asctime(time.localtime(time.time())) + "] Logging into Google account..."
+
         browser.get('https://accounts.google.com')
         wait = WebDriverWait(browser,5)
 
@@ -28,30 +30,40 @@ def enable():
         password.send_keys(info['password'])
         password.send_keys(Keys.RETURN)
 
-        return wait.until(
+        nextPage = wait.until(
              EC.presence_of_element_located((By.LINK_TEXT, "About Google")))
+
+        print "[" + time.asctime(time.localtime(time.time())) + "] Success!"
+
+        return True
 
     def setNoEmail():
 
+        print "[" + time.asctime(time.localtime(time.time())) + "] Changing delivery setting to 'No Email' for internal solutions group member..."
+
         browser.get(info['linkOne'])
+        wait = WebDriverWait(browser,5)
 
-        time.sleep(2)
-
-        selector = browser.find_element_by_id('gwt-uid-184')
+        selector = wait.until(
+             EC.presence_of_element_located((By.ID, 'gwt-uid-184')))
         selector.click()
-
-        time.sleep(2)
 
         save = browser.find_element_by_xpath('//div[@aria-label="Save"]')
         save.click()
 
         time.sleep(2)
 
-        return browser.find_element_by_id('groups-banner-link')
+        nextPage = wait.until(
+             EC.presence_of_element_located((By.ID, 'groups-banner-link')))
+
+        print "[" + time.asctime(time.localtime(time.time())) + "] Success!"
+
+        return True
 
     def disableModeration():
 
         browser.get(info['linkTwo'])
+        wait = WebDriverWait(browser,5)
 
         time.sleep(2)
 
@@ -70,6 +82,7 @@ def enable():
     def enableAutoReply():
 
         browser.get(info['linkThree'])
+        wait = WebDriverWait(browser,5)
 
         time.sleep(2)
 
@@ -105,27 +118,26 @@ def enable():
     print "\n[" + time.asctime(time.localtime(time.time())) + "] Initializing email autoresponder..."
 
     # Log into Google account
-    loggedIn = None
+    loggedIn = False
     while not loggedIn:
         try:
             # Set path to the chromedriver
             browser = webdriver.Chrome(chrome_options=chrome_options, executable_path=info['cdPath'])
-            print "[" + time.asctime(time.localtime(time.time())) + "] Logging into Google account..."
             loggedIn = login()
-            print "[" + time.asctime(time.localtime(time.time())) + "] Success!"
         except:
+            # Close previous browser object
             browser.quit()
-            print "[" + time.asctime(time.localtime(time.time())) + "] Failed to login - will try again..."
+            print "[" + time.asctime(time.localtime(time.time())) + "] Failed to login. Will try again..."
+            time.sleep(2)
 
     # Do the first action
     step1 = None
     while not step1:
         try:
-            print "[" + time.asctime(time.localtime(time.time())) + "] Changing delivery setting to 'No Email' for internal solutions group member..."
             step1 = setNoEmail()
-            print "[" + time.asctime(time.localtime(time.time())) + "] Success!"
         except:
             print "[" + time.asctime(time.localtime(time.time())) + "] Action failed - will try again..."
+            time.sleep(2)
 
     # Do the second action
     step2 = None
@@ -136,6 +148,7 @@ def enable():
             print "[" + time.asctime(time.localtime(time.time())) + "] Success!"
         except:
             print "[" + time.asctime(time.localtime(time.time())) + "] Action failed - will try again..."
+            time.sleep(2)
 
     # Do the third action
     step3 = None
@@ -146,6 +159,7 @@ def enable():
             print "[" + time.asctime(time.localtime(time.time())) + "] Success!"
         except:
             print "[" + time.asctime(time.localtime(time.time())) + "] Action failed - will try again..."
+            time.sleep(2)
 
     print "[" + time.asctime(time.localtime(time.time())) + "] Closing browser..."
     browser.close()
