@@ -27,3 +27,9 @@ Automating some workflows in Google Groups using the Selenium Python library.
 * Use `Start-Process <Python executable path> <main.py path>` to start the script as a background process that will run indefinitely.
 
 ### Linux
+
+### To Do
+
+* Need to implement this as part of a Django web API server.
+
+* Scripts will be run whenever certain API calls are made, which will trigger the email automation process.
