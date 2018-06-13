@@ -24,6 +24,8 @@ print 'Initializing tests...'
 
 print 'Tests starting, please stand by.'
 
+#job()
+
 while True:
     schedule.run_pending()
     time.sleep(1)

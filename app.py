@@ -11,14 +11,14 @@ class Enable(Resource):
 
         turnon.enable()
 
-        return 'Turning on.'
+        return 'Email automation successfully turned on.'
 
 class Disable(Resource):
     def get(self):
 
         turnoff.disable()
 
-        return 'Turning off'
+        return 'Email automation successfully turned off.'
 
 api.add_resource(Enable, '/enable')
 api.add_resource(Disable, '/disable')
