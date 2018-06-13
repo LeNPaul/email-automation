@@ -95,7 +95,7 @@ def enable():
              EC.presence_of_element_located((By.ID, 'gwt-uid-277')))
         enable.click()
 
-        file = open('email.txt', 'r')
+        file = open(info['emailText'], 'r')
         email =file.read()
 
         textBox = wait.until(
@@ -176,10 +176,10 @@ def enable():
 
         print "[" + time.asctime(time.localtime(time.time())) + "] Email autoresponder turned on!"
 
-        logs = open('logs.txt','a')
+        logs = open(info['logText'],'a')
         logs.write("[" + time.asctime(time.localtime(time.time())) + "] Process completed, email autoresponder enabled! Email automation successful! \n")
         logs.close()
     except:
         print "[" + time.asctime(time.localtime(time.time())) + "] Process error, email autoresponder not enabled! Email automation failed! \n"
-        logs = open('logs.txt','a')
+        logs = open(info['logText'],'a')
         logs.write("[" + time.asctime(time.localtime(time.time())) + "] Process error, email autoresponder not enabled! Email automation failed! \n")

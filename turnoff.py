@@ -170,10 +170,10 @@ def disable():
 
         print "[" + time.asctime(time.localtime(time.time())) + "] Email autoresponder turned off!"
 
-        logs = open('logs.txt','a')
+        logs = open(info['logText'],'a')
         logs.write("[" + time.asctime(time.localtime(time.time())) + "] Process completed, email autoresponder disabled! Email automation successful! \n")
         logs.close()
     except:
         print "[" + time.asctime(time.localtime(time.time())) + "] Process error, email autoresponder not disabled! Email automation failed! \n"
-        logs = open('logs.txt','a')
+        logs = open(info['logText'],'a')
         logs.write("[" + time.asctime(time.localtime(time.time())) + "] Process error, email autoresponder not disabled! Email automation failed! \n")
