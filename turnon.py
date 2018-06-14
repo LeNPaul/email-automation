@@ -1,6 +1,3 @@
-# todo:
-#   - Need to action some kind of checking to make sure that actions aren't repeated (therefore cancelling each out) on a retry
-
 from selenium import webdriver
 from selenium.webdriver.chrome.options import Options
 from selenium.webdriver.support.ui import WebDriverWait
@@ -72,11 +69,11 @@ def enable():
         if "true" in selector.get_attribute('aria-checked'):
             selector.click()
 
-        save = wait.until(
-             EC.presence_of_element_located((By.XPATH, '//div[@aria-label="Save"]')))
-        save.click()
+            save = wait.until(
+                 EC.presence_of_element_located((By.XPATH, '//div[@aria-label="Save"]')))
+            save.click()
 
-        time.sleep(2)
+            time.sleep(2)
 
         nextPage = wait.until(
              EC.presence_of_element_located((By.XPATH, '//div[@aria-disabled="true"]')))
@@ -92,22 +89,36 @@ def enable():
         browser.get(info['linkThree'])
         wait = WebDriverWait(browser,5)
 
-        enable = wait.until(
-             EC.presence_of_element_located((By.ID, 'gwt-uid-277')))
-        enable.click()
-
         file = open(info['emailText'], 'r')
         email =file.read()
 
-        textBox = wait.until(
-             EC.presence_of_element_located((By.XPATH, "//textarea[@id='gwt-uid-261']")))
-        textBox.send_keys(email)
+        enable = wait.until(
+             EC.presence_of_element_located((By.ID, 'gwt-uid-277')))
+        if "false" in enable.get_attribute('aria-checked'):
 
-        save = wait.until(
-             EC.presence_of_element_located((By.XPATH, '//*[@data-title="Save"]')))
-        save.click()
+            enable.click()
 
-        time.sleep(2)
+            textBox = wait.until(
+                 EC.presence_of_element_located((By.XPATH, "//textarea[@id='gwt-uid-261']")))
+            textBox.send_keys(email)
+
+            save = wait.until(
+                 EC.presence_of_element_located((By.XPATH, '//*[@data-title="Save"]')))
+            save.click()
+
+            time.sleep(2)
+        elif "true" in enable.get_attribute('aria-checked'):
+
+            textBox = wait.until(
+                 EC.presence_of_element_located((By.XPATH, "//textarea[@id='gwt-uid-261']")))
+            textBox.clear()
+            textBox.send_keys(email)
+
+            save = wait.until(
+                 EC.presence_of_element_located((By.XPATH, '//*[@data-title="Save"]')))
+            save.click()
+
+            time.sleep(2)
 
         nextPage = wait.until(
              EC.presence_of_element_located((By.ID, 'groups-banner-link')))

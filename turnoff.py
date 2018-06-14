@@ -69,13 +69,12 @@ def disable():
              EC.presence_of_element_located((By.ID, 'gwt-uid-345')))
         if "false" in selector.get_attribute('aria-checked'):
             selector.click()
-        selector.click()
 
-        save = wait.until(
-             EC.presence_of_element_located((By.XPATH, '//div[@aria-label="Save"]')))
-        save.click()
+            save = wait.until(
+                 EC.presence_of_element_located((By.XPATH, '//div[@aria-label="Save"]')))
+            save.click()
 
-        time.sleep(2)
+            time.sleep(2)
 
         nextPage = wait.until(
              EC.presence_of_element_located((By.XPATH, '//div[@aria-disabled="true"]')))
@@ -93,13 +92,14 @@ def disable():
 
         enable = wait.until(
              EC.presence_of_element_located((By.ID, 'gwt-uid-277')))
-        enable.click()
+        if "true" in enable.get_attribute('aria-checked'):
+            enable.click()
 
-        save = wait.until(
-             EC.presence_of_element_located((By.XPATH, '//*[@data-title="Save"]')))
-        save.click()
+            save = wait.until(
+                 EC.presence_of_element_located((By.XPATH, '//*[@data-title="Save"]')))
+            save.click()
 
-        time.sleep(2)
+            time.sleep(2)
 
         nextPage = wait.until(
              EC.presence_of_element_located((By.XPATH, '//div[@aria-disabled="true"]')))
