@@ -67,6 +67,8 @@ def disable():
 
         selector = wait.until(
              EC.presence_of_element_located((By.ID, 'gwt-uid-345')))
+        if "false" in selector.get_attribute('aria-checked'):
+            selector.click()
         selector.click()
 
         save = wait.until(
