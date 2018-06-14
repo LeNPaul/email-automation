@@ -69,7 +69,8 @@ def enable():
 
         selector = wait.until(
              EC.presence_of_element_located((By.ID, 'gwt-uid-345')))
-        selector.click()
+        if "true" in selector.get_attribute('aria-checked'):
+            selector.click()
 
         save = wait.until(
              EC.presence_of_element_located((By.XPATH, '//div[@aria-label="Save"]')))
