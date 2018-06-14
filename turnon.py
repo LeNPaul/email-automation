@@ -184,7 +184,7 @@ def enable():
 
         print "[" + time.asctime(time.localtime(time.time())) + "] Closing browser..."
         browser.close()
-        print "[" + time.asctime(time.localtime(time.time())) + "] Browser turned off"
+        print "[" + time.asctime(time.localtime(time.time())) + "] Success!"
 
         print "[" + time.asctime(time.localtime(time.time())) + "] Email autoresponder turned on!"
 

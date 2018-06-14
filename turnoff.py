@@ -168,7 +168,7 @@ def disable():
 
         browser.close()
 
-        print "[" + time.asctime(time.localtime(time.time())) + "] Browser closed!"
+        print "[" + time.asctime(time.localtime(time.time())) + "] Success!"
 
         print "[" + time.asctime(time.localtime(time.time())) + "] Email autoresponder turned off!"
 
