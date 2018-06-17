@@ -6,7 +6,7 @@ Automating some workflows in Google Groups using the Selenium Python library.
 
 1. Download files
 
-2. Create a file called `credentials.json` and provide the encrypted password and username, as well as the three links required
+2. Create a file called `credentials.json` and provide the encrypted password and username, the file paths to the `email.txt` and `logs.txt` file, as well as the three links required
 
 3. Create a file called `email.txt` and provide the email response that will be sent when a support inquiry is made during off hours
 
@@ -22,14 +22,11 @@ Automating some workflows in Google Groups using the Selenium Python library.
 
 4. chromedriver
 
-### Windows
+5. flask
 
-* Use `Start-Process <Python executable path> <main.py path>` to start the script as a background process that will run indefinitely.
+### Deployment
 
-### Linux
+* Simply run the flask web server using `python app.py`
 
-### To Do
-
-* Need to implement this as part of a Django web API server.
-
-* Scripts will be run whenever certain API calls are made, which will trigger the email automation process.
+* The scripts are run depending on which API call is made:
+  * `http://localhost:5000/enable` will enable the email automation workflow, and `http://localhost:5000/disable` will disable the email automation workflow
