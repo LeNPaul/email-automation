@@ -6,7 +6,21 @@ Automating some workflows in Google Groups using the Selenium Python library.
 
 1. Download files
 
-2. Create a file called `credentials.json` and provide the encrypted password and username, the file paths to the `email.txt` and `logs.txt` file, as well as the three links required
+2. Create a file called `credentials.json` and provide the encrypted password and username, the file paths to the `email.txt` and `logs.txt` file, the path to the Chrome Driver, as well as the three links required:
+
+```
+{
+  "cdPath"    : "",
+  "emailText" : "",
+  "logText"   : "",
+  "username"  : "",
+  "password"  : "",
+  "linkOne"   : "",
+  "linkTwo"   : "",
+  "linkThree" : ""
+}
+
+```
 
 3. Create a file called `email.txt` and provide the email response that will be sent when a support inquiry is made during off hours
 
