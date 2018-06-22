@@ -44,3 +44,7 @@ Automating some workflows in Google Groups using the Selenium Python library.
 
 * The scripts are run depending on which API call is made:
   * `http://localhost:5000/enable` will enable the email automation workflow, and `http://localhost:5000/disable` will disable the email automation workflow
+
+### To Do
+
+* Implement as a production web server
