@@ -48,3 +48,4 @@ Automating some workflows in Google Groups using the Selenium Python library.
 ### To Do
 
 * Implement as a production web server
+* Refactor to improve readability and performance
