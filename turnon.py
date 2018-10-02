@@ -22,6 +22,8 @@ def enable():
         email.send_keys(info['username'])
         email.send_keys(Keys.RETURN)
 
+        time.sleep(2)
+
         password = wait.until(
              EC.presence_of_element_located((By.CSS_SELECTOR, "input[type=password]")))
         password.send_keys(base64.b64decode(info['password']))
@@ -42,7 +44,7 @@ def enable():
         wait = WebDriverWait(browser,5)
 
         selector = wait.until(
-             EC.presence_of_element_located((By.ID, 'gwt-uid-184')))
+             EC.presence_of_element_located((By.ID, 'gwt-uid-188')))
         selector.click()
 
         save = browser.find_element_by_xpath('//div[@aria-label="Save"]')
@@ -65,7 +67,7 @@ def enable():
         wait = WebDriverWait(browser,5)
 
         selector = wait.until(
-             EC.presence_of_element_located((By.ID, 'gwt-uid-345')))
+             EC.presence_of_element_located((By.ID, 'gwt-uid-285')))
         if "true" in selector.get_attribute('aria-checked'):
             selector.click()
 
@@ -134,7 +136,7 @@ def enable():
 
     # Instantiate a chrome options object so you can set the size and headless preference
     chrome_options = Options()
-    chrome_options.set_headless(headless=True)
+    chrome_options.set_headless(headless=False)
 
     print "\n[" + time.asctime(time.localtime(time.time())) + "] Initializing email autoresponder..."
 

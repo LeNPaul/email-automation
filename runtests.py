@@ -13,12 +13,12 @@ def job():
     print '\nTest 1 complete. Starting test 2...'
 
     #turnon.enable()
-    turnoff.disable()
+    #turnoff.disable()
 
     print '\nTest 2 complete. Testing complete.'
 
 #schedule.every().tuesday.at("14:00").do(job)
-schedule.every(1).minutes.do(job)
+#schedule.every(1).minutes.do(job)
 
 print 'Initializing tests...'
 
