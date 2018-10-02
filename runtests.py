@@ -7,12 +7,12 @@ def job():
 
     print '\nStarting test 1...'
 
-    turnon.enable()
+    #turnon.enable()
     #turnoff.disable()
 
     print '\nTest 1 complete. Starting test 2...'
 
-    #turnon.enable()
+    turnon.enable()
     #turnoff.disable()
 
     print '\nTest 2 complete. Testing complete.'

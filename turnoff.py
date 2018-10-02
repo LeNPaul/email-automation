@@ -22,10 +22,14 @@ def disable():
         email.send_keys(info['username'])
         email.send_keys(Keys.RETURN)
 
+        time.sleep(2)
+
         password = wait.until(
              EC.presence_of_element_located((By.CSS_SELECTOR, "input[type=password]")))
         password.send_keys(base64.b64decode(info['password']))
         password.send_keys(Keys.RETURN)
+
+        time.sleep(2)
 
         nextPage = wait.until(
              EC.presence_of_element_located((By.LINK_TEXT, "About Google")))
@@ -42,7 +46,7 @@ def disable():
         wait = WebDriverWait(browser,5)
 
         selector = wait.until(
-             EC.presence_of_element_located((By.ID, "gwt-uid-190")))
+             EC.presence_of_element_located((By.ID, "gwt-uid-194")))
         selector.click()
 
         save = wait.until(
@@ -66,9 +70,11 @@ def disable():
         wait = WebDriverWait(browser,5)
 
         selector = wait.until(
-             EC.presence_of_element_located((By.ID, 'gwt-uid-345')))
+             EC.presence_of_element_located((By.ID, 'gwt-uid-180')))
         if "false" in selector.get_attribute('aria-checked'):
             selector.click()
+
+            time.sleep(2)
 
             save = wait.until(
                  EC.presence_of_element_located((By.XPATH, '//div[@aria-label="Save"]')))
@@ -91,7 +97,7 @@ def disable():
         wait = WebDriverWait(browser,5)
 
         enable = wait.until(
-             EC.presence_of_element_located((By.ID, 'gwt-uid-277')))
+             EC.presence_of_element_located((By.ID, 'gwt-uid-281')))
         if "true" in enable.get_attribute('aria-checked'):
             enable.click()
 

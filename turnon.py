@@ -29,6 +29,8 @@ def enable():
         password.send_keys(base64.b64decode(info['password']))
         password.send_keys(Keys.RETURN)
 
+        time.sleep(2)
+
         nextPage = wait.until(
              EC.presence_of_element_located((By.LINK_TEXT, "About Google")))
 
@@ -71,6 +73,8 @@ def enable():
         if "true" in selector.get_attribute('aria-checked'):
             selector.click()
 
+            time.sleep(2)
+
             save = wait.until(
                  EC.presence_of_element_located((By.XPATH, '//div[@aria-label="Save"]')))
             save.click()
@@ -104,6 +108,8 @@ def enable():
                  EC.presence_of_element_located((By.XPATH, "//textarea[@id='gwt-uid-265']")))
             textBox.send_keys(email)
 
+            time.sleep(2)
+
             save = wait.until(
                  EC.presence_of_element_located((By.XPATH, '//*[@data-title="Save"]')))
             save.click()
@@ -115,6 +121,8 @@ def enable():
                  EC.presence_of_element_located((By.XPATH, "//textarea[@id='gwt-uid-265']")))
             textBox.clear()
             textBox.send_keys(email)
+
+            time.sleep(2)
 
             save = wait.until(
                  EC.presence_of_element_located((By.XPATH, '//*[@data-title="Save"]')))
@@ -136,7 +144,7 @@ def enable():
 
     # Instantiate a chrome options object so you can set the size and headless preference
     chrome_options = Options()
-    chrome_options.set_headless(headless=False)
+    chrome_options.set_headless(headless=True)
 
     print "\n[" + time.asctime(time.localtime(time.time())) + "] Initializing email autoresponder..."
 
