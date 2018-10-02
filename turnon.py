@@ -67,7 +67,7 @@ def enable():
         wait = WebDriverWait(browser,5)
 
         selector = wait.until(
-             EC.presence_of_element_located((By.ID, 'gwt-uid-285')))
+             EC.presence_of_element_located((By.ID, 'gwt-uid-180')))
         if "true" in selector.get_attribute('aria-checked'):
             selector.click()
 
@@ -95,13 +95,13 @@ def enable():
         email =file.read()
 
         enable = wait.until(
-             EC.presence_of_element_located((By.ID, 'gwt-uid-277')))
+             EC.presence_of_element_located((By.ID, 'gwt-uid-281')))
         if "false" in enable.get_attribute('aria-checked'):
 
             enable.click()
 
             textBox = wait.until(
-                 EC.presence_of_element_located((By.XPATH, "//textarea[@id='gwt-uid-261']")))
+                 EC.presence_of_element_located((By.XPATH, "//textarea[@id='gwt-uid-265']")))
             textBox.send_keys(email)
 
             save = wait.until(
@@ -112,7 +112,7 @@ def enable():
         elif "true" in enable.get_attribute('aria-checked'):
 
             textBox = wait.until(
-                 EC.presence_of_element_located((By.XPATH, "//textarea[@id='gwt-uid-261']")))
+                 EC.presence_of_element_located((By.XPATH, "//textarea[@id='gwt-uid-265']")))
             textBox.clear()
             textBox.send_keys(email)
 
