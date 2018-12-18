@@ -32,7 +32,7 @@ def enable():
         time.sleep(2)
 
         nextPage = wait.until(
-             EC.presence_of_element_located((By.LINK_TEXT, "About Google")))
+             EC.presence_of_element_located((By.LINK_TEXT, "Account")))
 
         print "[" + time.asctime(time.localtime(time.time())) + "] Success!"
 
