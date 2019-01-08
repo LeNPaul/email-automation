@@ -47,6 +47,8 @@ Automating some workflows in Google Groups using the Selenium Python library.
   
 * It is possible to use the `schedule` library to regularly schedule the email automation process to run (see the `main.py` file for examples on how to do this.
 
+* In the current deployment, a separate program is used to make the API calls, and the scheduling is handled by that separate program.
+
 ### To Do
 
 * Implement as a production web server
