@@ -46,7 +46,7 @@ def disable():
         wait = WebDriverWait(browser,5)
 
         selector = wait.until(
-             EC.presence_of_element_located((By.ID, "gwt-uid-194")))
+             EC.presence_of_element_located((By.ID, "gwt-uid-195")))
         selector.click()
 
         save = wait.until(
@@ -121,7 +121,7 @@ def disable():
 
     # Instantiate a chrome options object so you can set the size and headless preference
     chrome_options = Options()
-    chrome_options.set_headless(headless=True)
+    chrome_options.set_headless(headless=False)
 
     print "\n[" + time.asctime(time.localtime(time.time())) + "] Turning off email autoresponder... "
 
