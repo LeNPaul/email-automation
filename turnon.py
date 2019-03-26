@@ -137,7 +137,7 @@ def enable():
 
         return True
 
-    # Read in credentials and chromedriver file path
+    # Read in credentials and chromedriver file path - might need full path
     file = open('credentials.json', 'r')
     info = json.loads(file.read())
     file.close()
