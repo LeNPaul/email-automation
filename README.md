@@ -60,3 +60,5 @@ Automating some workflows in Google Groups using the Selenium Python library.
 * Refactor to locate web elements that would change less often
 
 * Refactor for better Python programming best practices
+
+* Refactor to reuse code instead of repeating
