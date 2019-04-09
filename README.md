@@ -53,7 +53,7 @@ Automating some workflows in Google Groups using the Selenium Python library.
 
 ### To Do
 
-* Implement as a production web server (use flask)
+* Implement as a production web server (use flask) and keep as a self-contained web application.
 
 * Refactor to improve readability and performance
 
