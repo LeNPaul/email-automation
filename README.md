@@ -62,3 +62,4 @@ Automating some workflows in Google Groups using the Selenium Python library.
 * Refactor for better Python programming best practices
 
 * Refactor to reuse code instead of repeating
+    * The login function should be the same for both `turnoff.py` and `turnon.py`
